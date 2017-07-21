@@ -4,15 +4,24 @@
 
 Param(
     [string] [Parameter(Mandatory=$true)] $ResourceGroupLocation,
-    [string] $ResourceGroupName = 'ECG-3Server-Buildd',
-    [switch] $UploadArtifacts,
+    [string] $ResourceGroupName,
     [string] $StorageAccountName,
     [string] $StorageContainerName = $ResourceGroupName.ToLowerInvariant() + '-stageartifacts',
     [string] $TemplateFile = 'WindowsVirtualMachine.json',
     [string] $TemplateParametersFile = 'WindowsVirtualMachine.parameters.json',
-    [string] $ArtifactStagingDirectory = '.',
+    [string] $ArtifactStagingDirectory = 'DSC',
     [string] $DSCSourceFolder = 'DSC',
-    [switch] $ValidateOnly
+    [switch] $ValidateOnly,
+	[string] $adminUsername,
+	[string] $adminPassword,
+	[string] $vmBaseName,
+	[string] $domainName,
+	[string] $ouPath,
+	[string] $domainaddUsername,
+	[string] $domainaddPassword,
+	[string] $virtualNetworkName,
+	[string] $virtualNetworkResourceGroupName,
+	[string] $subnetName
 )
 
 try {
@@ -28,11 +37,26 @@ function Format-ValidationOutput {
     return @($ValidationOutput | Where-Object { $_ -ne $null } | ForEach-Object { @('  ' * $Depth + ': ' + $_.Message) + @(Format-ValidationOutput @($_.Details) ($Depth + 1)) })
 }
 
+$SecureAdminPassword=ConvertTo-SecureString $adminPassword –asplaintext –force 
+$SecuredomainjoinPassword=ConvertTo-SecureString $domainaddPassword –asplaintext –force 
+
 $OptionalParameters = New-Object -TypeName Hashtable
+$OptionalParameters['adminUsername'] = $adminUsername
+$OptionalParameters['adminPassword'] = $SecureAdminPassword
+$OptionalParameters['vmBaseName'] = $vmBaseName
+$OptionalParameters['domainName'] = $domainName
+$OptionalParameters['ouPath'] = $ouPath
+$OptionalParameters['domainaddUsername'] = $domainaddUsername
+$OptionalParameters['domainaddPassword'] = $SecuredomainjoinPassword
+$OptionalParameters['virtualNetworkName'] = $virtualNetworkName
+$OptionalParameters['virtualNetworkResourceGroupName'] = $virtualNetworkResourceGroupName
+$OptionalParameters['subnetName'] = $subnetName
+
+
 $TemplateFile = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $TemplateFile))
 $TemplateParametersFile = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $TemplateParametersFile))
 
-if ($UploadArtifacts) {
+
     # Convert relative paths to absolute paths if needed
     $ArtifactStagingDirectory = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $ArtifactStagingDirectory))
     $DSCSourceFolder = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $DSCSourceFolder))
@@ -65,7 +89,7 @@ if ($UploadArtifacts) {
 
     # Create the storage account if it doesn't already exist
     if ($StorageAccount -eq $null) {
-        $StorageResourceGroupName = 'ARM_Deploy_Staging'
+        $StorageResourceGroupName = $ResourceGroupName
         New-AzureRmResourceGroup -Location "$ResourceGroupLocation" -Name $StorageResourceGroupName -Force
         $StorageAccount = New-AzureRmStorageAccount -StorageAccountName $StorageAccountName -Type 'Standard_LRS' -ResourceGroupName $StorageResourceGroupName -Location "$ResourceGroupLocation"
     }
@@ -89,7 +113,7 @@ if ($UploadArtifacts) {
         $OptionalParameters[$ArtifactsLocationSasTokenName] = ConvertTo-SecureString -AsPlainText -Force `
             (New-AzureStorageContainerSASToken -Container $StorageContainerName -Context $StorageAccount.Context -Permission r -ExpiryTime (Get-Date).AddHours(4))
     }
-}
+
 
 # Create or update the resource group using the specified template file and template parameters file
 New-AzureRmResourceGroup -Name $ResourceGroupName -Location $ResourceGroupLocation -Verbose -Force
@@ -118,3 +142,6 @@ else {
         Write-Output '', 'Template deployment returned the following errors:', @(@($ErrorMessages) | ForEach-Object { $_.Exception.Message.TrimEnd("`r`n") })
     }
 }
+
+Remove-AzureRmStorageAccount -ResourceGroupName $resourceGroupName -Name $StorageAccountName -Force
+#Remove-AzureStorageContainer -Name $StorageContainerName -Context $StorageAccount.Context -Force -Verbose

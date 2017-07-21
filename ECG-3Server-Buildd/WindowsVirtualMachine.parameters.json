@@ -5,7 +5,52 @@
     "adminUsername": {
       "value": null
     },
-    "dnsNameForPublicIP": {
+    "adminPassword": {
+      "value": null
+    },
+    "vmBaseName": {
+      "value": null
+    },
+    "windowsOSVersion": {
+      "value": null
+    },
+    "windowsVMSize": {
+      "value": null
+    },
+    "sqlVMSize": {
+      "value": null,
+    },
+    "sqlSku": {
+      "value": null
+    },
+    "sqlImageOffer": {
+      "value": null
+    },
+    "domainName": {
+      "value": null
+    },
+    "ouPath": {
+      "value": null
+    },
+    "domainadduserName": {
+      "value": null
+    },
+    "domainaddPassword": {
+      "value": null
+    },
+    "virtualNetworkName": {
+      "value": null
+    },
+    "virtualNetworkResourceGroupName": {
+      "value": null
+    },
+    "subnetName": {
+      "value": null
+    },
+    "_artifactsLocation": {
+      "value": null
+    },
+    "_artifactsLocationSasToken": {
       "value": null
     }
   }
