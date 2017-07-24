@@ -114,7 +114,7 @@
     "sqlVMName": "[concat(parameters('vmBaseName'),'-sql01')]",
     "appVMName": "[concat(parameters('vmBaseName'),'-app01')]",
     "webVMName": "[concat(parameters('vmBaseName'),'-web01')]",
-    "vmdscArchiveFileName": "preshareSharepointServer.ps1.zip",
+    "vmdscArchiveFileName": "PreshareSharepointServer.ps1.zip",
     "sqldscArchiveFileName": "PrepareSqlServer.ps1.zip"
   },
   "resources": [
@@ -567,7 +567,7 @@
                 }
               },
               "configurationArguments": {
-                "nodeName": "localhost"
+
               }
             },
             "protectedSettings": {
@@ -933,7 +933,6 @@
                 }
               },
               "configurationArguments": {
-                "nodeName": "localhost"
               }
             },
             "protectedSettings": {
@@ -1308,7 +1307,6 @@
                 }
               },
               "configurationArguments": {
-                "nodeName": "localhost"
               }
             },
             "protectedSettings": {

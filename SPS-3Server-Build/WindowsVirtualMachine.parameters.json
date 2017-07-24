@@ -2,50 +2,5 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "adminUsername": {
-      "value": ""
-    },
-    "adminPassword": {
-      "value": ""
-    },
-    "vmBaseName": {
-      "value": ""
-    },
-    "windowsOSVersion": {
-      "value": ""
-    },
-    "windowsVMSize": {
-      "value": ""
-    },
-    "sqlVMSize": {
-      "value": ""
-    },
-    "sqlSku": {
-      "value": ""
-    },
-    "sqlImageOffer": {
-      "value": ""
-    },
-    "domainName": {
-      "value": ""
-    },
-    "ouPath": {
-      "value": ""
-    },
-    "domainadduserName": {
-      "value": ""
-    },
-    "domainaddPassword": {
-      "value": ""
-    },
-    "virtualNetworkName": {
-      "value": ""
-    },
-    "virtualNetworkResourceGroupName": {
-      "value": ""
-    },
-    "subnetName": {
-      "value": ""
-    }
   }
 }
