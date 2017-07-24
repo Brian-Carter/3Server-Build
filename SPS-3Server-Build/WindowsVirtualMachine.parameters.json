@@ -3,55 +3,49 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "adminUsername": {
-      "value": null
+      "value": ""
     },
     "adminPassword": {
-      "value": null
+      "value": ""
     },
     "vmBaseName": {
-      "value": null
+      "value": ""
     },
     "windowsOSVersion": {
-      "value": null
+      "value": ""
     },
     "windowsVMSize": {
-      "value": null
+      "value": ""
     },
     "sqlVMSize": {
-      "value": null
+      "value": ""
     },
     "sqlSku": {
-      "value": null
+      "value": ""
     },
     "sqlImageOffer": {
-      "value": null
+      "value": ""
     },
     "domainName": {
-      "value": null
+      "value": ""
     },
     "ouPath": {
-      "value": null
+      "value": ""
     },
     "domainadduserName": {
-      "value": null
+      "value": ""
     },
     "domainaddPassword": {
-      "value": null
+      "value": ""
     },
     "virtualNetworkName": {
-      "value": null
+      "value": ""
     },
     "virtualNetworkResourceGroupName": {
-      "value": null
+      "value": ""
     },
     "subnetName": {
-      "value": null
-    },
-    "_artifactsLocation": {
-      "value": null
-    },
-    "_artifactsLocationSasToken": {
-      "value": null
+      "value": ""
     }
   }
 }
