@@ -143,5 +143,5 @@ else {
     }
 }
 
-#Remove-AzureRmStorageAccount -ResourceGroupName $resourceGroupName -Name $StorageAccountName -Force
+Remove-AzureRmStorageAccount -ResourceGroupName $resourceGroupName -Name $StorageAccountName -Force
 #Remove-AzureStorageContainer -Name $StorageContainerName -Context $StorageAccount.Context -Force -Verbose
