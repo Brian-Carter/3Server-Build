@@ -81,6 +81,15 @@
     "subnetName": {
       "type": "string"
     },
+    "appVMIP": {
+      "type": "string"
+    },
+    "webVMIP": {
+      "type": "string"
+    },
+    "sqlVMIP": {
+      "type": "string"
+    },
     "_artifactsLocation": {
       "type": "string",
       "metadata": {
@@ -156,7 +165,8 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('appVMIP')]",
               "subnet": {
                 "id": "[variables('subnetRef')]"
               }
@@ -179,7 +189,8 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('webVMIP')]",
               "subnet": {
                 "id": "[variables('subnetRef')]"
               }
@@ -202,7 +213,8 @@
           {
             "name": "ipconfig1",
             "properties": {
-              "privateIPAllocationMethod": "Dynamic",
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('sqlVMIP')]",
               "subnet": {
                 "id": "[variables('subnetRef')]"
               }
