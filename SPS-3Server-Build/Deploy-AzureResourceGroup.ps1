@@ -21,7 +21,10 @@ Param(
 	[string] $domainaddPassword,
 	[string] $virtualNetworkName,
 	[string] $virtualNetworkResourceGroupName,
-	[string] $subnetName
+	[string] $subnetName,
+	[string] $appVMIP,
+	[string] $webVMIP,
+	[string] $sqlVMIP
 )
 
 try {
@@ -51,7 +54,9 @@ $OptionalParameters['domainaddPassword'] = $SecuredomainjoinPassword
 $OptionalParameters['virtualNetworkName'] = $virtualNetworkName
 $OptionalParameters['virtualNetworkResourceGroupName'] = $virtualNetworkResourceGroupName
 $OptionalParameters['subnetName'] = $subnetName
-
+$optionalParameters['appVMIP'] = $appVMIP
+$optionalParameters['webVMIP'] = $webVMIP
+$optionalParameters['sqlVMIP'] = $sqlVMIP
 
 $TemplateFile = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $TemplateFile))
 $TemplateParametersFile = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $TemplateParametersFile))
