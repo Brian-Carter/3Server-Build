@@ -13,12 +13,12 @@ Param(
     [string] $DSCSourceFolder = 'DSC',
     [switch] $ValidateOnly,
 	[string] $adminUsername,
-	[string] $adminPassword,
+	[securestring] $adminPassword,
 	[string] $vmBaseName,
 	[string] $domainName,
 	[string] $ouPath,
 	[string] $domainaddUsername,
-	[string] $domainaddPassword,
+	[securestring] $domainaddPassword,
 	[string] $virtualNetworkName,
 	[string] $virtualNetworkResourceGroupName,
 	[string] $subnetName,
@@ -40,17 +40,17 @@ function Format-ValidationOutput {
     return @($ValidationOutput | Where-Object { $_ -ne $null } | ForEach-Object { @('  ' * $Depth + ': ' + $_.Message) + @(Format-ValidationOutput @($_.Details) ($Depth + 1)) })
 }
 
-$SecureAdminPassword=ConvertTo-SecureString $adminPassword –asplaintext –force 
-$SecuredomainjoinPassword=ConvertTo-SecureString $domainaddPassword –asplaintext –force 
+#$SecureAdminPassword=ConvertTo-SecureString $adminPassword –asplaintext –force 
+#$SecuredomainjoinPassword=ConvertTo-SecureString $domainaddPassword –asplaintext –force 
 
 $OptionalParameters = New-Object -TypeName Hashtable
 $OptionalParameters['adminUsername'] = $adminUsername
-$OptionalParameters['adminPassword'] = $SecureAdminPassword
+$OptionalParameters['adminPassword'] = $adminPassword
 $OptionalParameters['vmBaseName'] = $vmBaseName
 $OptionalParameters['domainName'] = $domainName
 $OptionalParameters['ouPath'] = $ouPath
 $OptionalParameters['domainaddUsername'] = $domainaddUsername
-$OptionalParameters['domainaddPassword'] = $SecuredomainjoinPassword
+$OptionalParameters['domainaddPassword'] = $domainaddPassword
 $OptionalParameters['virtualNetworkName'] = $virtualNetworkName
 $OptionalParameters['virtualNetworkResourceGroupName'] = $virtualNetworkResourceGroupName
 $OptionalParameters['subnetName'] = $subnetName

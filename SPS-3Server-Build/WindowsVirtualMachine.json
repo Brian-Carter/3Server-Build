@@ -120,7 +120,7 @@
     "spAppVMwadmetricsresourceid": "[resourceId('Microsoft.Compute/virtualMachines', variables('appVMName'))]",
     "spWebVMwadmetricsresourceid": "[resourceId('Microsoft.Compute/virtualMachines', variables('webVMName'))]",
     "spSQLVMwadmetricsresourceid": "[resourceId('Microsoft.Compute/virtualMachines', variables('sqlVMName'))]",
-    "sqlVMName": "[concat(parameters('vmBaseName'),'-sql01')]",
+    "sqlVMName": "[concat(parameters('vmBaseName'),'-sql1')]",
     "appVMName": "[concat(parameters('vmBaseName'),'-app01')]",
     "webVMName": "[concat(parameters('vmBaseName'),'-web01')]",
     "vmdscArchiveFileName": "PrepareSharePointServer.ps1.zip",
